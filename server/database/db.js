@@ -1,5 +1,5 @@
 const { Pool } = require("pg");
-require("dotenv").config();
+
 
 const { Sequelize } = require('sequelize')
 require('dotenv').config();
@@ -13,6 +13,10 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'postgres',
+    dialectOptions: {
+        ssl: false,
+        authMechanism: 'scram-sha-256'
+    },
     logging: false, // Set to console.log to see SQL queries
     pool: {
       max: 5,
