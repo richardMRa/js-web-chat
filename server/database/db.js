@@ -13,10 +13,6 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'postgres',
-    dialectOptions: {
-        ssl: false,
-        authMechanism: 'scram-sha-256'
-    },
     logging: false, // Set to console.log to see SQL queries
     pool: {
       max: 5,
@@ -28,7 +24,7 @@ const sequelize = new Sequelize(
 );
 
 // Test connection
-const testConnection = async () => {
+/* const testConnection = async () => {
   try {
     await sequelize.authenticate();
     console.log('Database connection established successfully.');
@@ -37,6 +33,6 @@ const testConnection = async () => {
   }
 };
 
-testConnection();
+testConnection(); */
 
 module.exports = sequelize;
