@@ -19,7 +19,19 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Something went wrong!"})
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Sync database and start server
+const StartServer = async () => {
+  try { 
+    // Sync all models with database
+    await sequelize.sync({ alter: true})
+    console.log('Dtabase synced succesfully')
+  
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`)
+    })
+
+  } catch ( error ) { 
+    console.error( 'Unable to start server:', error)
+  }
+
+}
